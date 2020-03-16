@@ -12,10 +12,14 @@ class Discord_Info(commands.Cog):
 
     @commands.command()
     @commands.guild_only()
-    async def avatar(self, ctx, *, user: discord.Member = None):
-        """ Get the avatar of you or someone else """
-        user = user or ctx.author
-        await ctx.send(f"Avatar to **{user.name}**\n{user.avatar_url_as(size=1024)}")
+    async def avatar(self, ctx,*,member:discord.Member=None):
+        await ctx.message.delete(delay=0.3)
+        if member == None:
+            member = ctx.message.author
+        embed=discord.Embed(title="Avatar of "+member.display_name,description=None,colour=0xFFC600)
+        embed.set_image(url = member.avatar_url)
+        await ctx.send(embed=embed)
+        
 
     @commands.command()
     @commands.guild_only()
