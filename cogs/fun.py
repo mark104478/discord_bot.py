@@ -42,6 +42,11 @@ class Fun_Commands(commands.Cog):
             bio = BytesIO(req)
             bio.seek(0)
             await ctx.send(content=content, file=discord.File(bio, filename=filename))
+            
+    @commands.command()
+    async def say(self, ctx, *, args):
+        await ctx.message.delete(delay=0.5)
+        return await ctx.send(args)
 
     @commands.command()
     @commands.cooldown(rate=1, per=1.5, type=commands.BucketType.user)
